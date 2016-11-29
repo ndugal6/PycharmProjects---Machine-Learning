@@ -58,3 +58,6 @@ plt.suptitle('Patches of faces\nTrain time %.1fs on %d patches' %
 plt.subplots_adjust(0.08, 0.02, 0.92, 0.85, 0.08, 0.23)
 
 plt.show()
+
+class faceCluster():
+    pass

@@ -1,25 +1,89 @@
 # read in the iris data
 from sklearn.datasets import load_iris
-iris = load_iris()
+from create_Dataset2 import  CustomDataSet
+import numpy as np
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.metrics import pairwise_distances_argmin
+from sklearn.datasets import load_sample_image
+from sklearn.utils import shuffle
+from time import time
+from scipy import misc
+
+dic = dict(data=[], target=[])
+
+for i in range(20):
+    dat = dic['data']
+    img = misc.imread("/Users/nickdugal/desktop/pics/oscilating/wave{}.jpeg".format(i)) / 255
+    w, h, d = original_shape = tuple(img.shape)
+    assert d == 4, print(img.shape)
+    image_array = np.reshape(img, (w * h, d))
+    dat.append(image_array)
+    dic['data'] = dat
+    tar = dic['target']
+    tar.append(0)
+    dic['target'] = tar
+
+
+
+
+
+
+ds = CustomDataSet()
+ds.data = dic['data']
+ds.target = dic['target']
+
+
+
+#iris = load_iris()
 
 # create X (features) and y (response)
-X = iris.data
-y = iris.target
+
+X = ds.data
+#sum(sum(X,[]),[])
+
+#c, f, r = org_shape = tuple(np.shape(X))
+#newX = np.reshape(X,(c,f))
+y = ds.target
 
 
 # import the class
+
 from sklearn.linear_model import LogisticRegression
 
 # instantiate the model (using the default parameters)
 logreg = LogisticRegression()
 
 # fit the model with data
+print(type(X))
+print(np.shape(X))
+
+import itertools as it
+                            # a=[]
+
+                            # for i in range(len(X)):
+                                # b=[[]]
+                                # for j in range(len(X[i])-1):
+                            #         b.append(all(range(len(X[i][j]))))
+                                    #
+                            # a.append(b)
+                                # print(type(a))
+                                # print(np.shape(a))
+                                # X = a.copy()
+
+
+
+print(np.shape(X))
+print(np.shape(y))
 logreg.fit(X, y)
 
 # predict the response values for the observations in X
+
 logreg.predict(X)
 
 # store the predicted response values
+
 y_pred = logreg.predict(X)
 
 # check how many predictions were generated

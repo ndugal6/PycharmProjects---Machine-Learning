@@ -11,14 +11,35 @@ import matplotlib.pyplot as plt
 
 from sklearn.datasets import fetch_olivetti_faces
 from sklearn.ensemble import ExtraTreesClassifier
+from scipy import misc
+import numpy as np
 
 # Number of cores to use to perform parallel fitting of the forest model
 n_jobs = 1
 
 # Load the faces dataset
-data = fetch_olivetti_faces()
-X = data.images.reshape((len(data.images), -1))
-y = data.target
+from create_Dataset2 import  CustomDataSet
+dic = dict(data=[], target=[])
+
+for i in range(20):
+    dat = dic['data']
+    img = misc.imread("/Users/nickdugal/desktop/pics/oscilating/wave{}.jpeg".format(i)) / 255
+    w, h, d = original_shape = tuple(img.shape)
+    assert d == 4, print(img.shape)
+    image_array = np.reshape(img, (w * h, d))
+    dat.append(image_array)
+    dic['data'] = dat
+    tar = dic['target']
+    tar.append(0)
+    dic['target'] = tar
+
+ds = CustomDataSet()
+ds.data = dic['data']
+ds.target = dic['target']
+X = np.asarray(ds.data)
+#data = fetch_olivetti_faces()
+X = X.reshape((len(ds.data), -1))
+y = np.asarray(ds.target)
 
 mask = y < 5  # Limit to 5 classes
 X = X[mask]
@@ -35,7 +56,7 @@ forest = ExtraTreesClassifier(n_estimators=1000,
 forest.fit(X, y)
 print("done in %0.3fs" % (time() - t0))
 importances = forest.feature_importances_
-importances = importances.reshape(data.images[0].shape)
+importances = importances.reshape(ds.data[0].shape)
 
 # Plot pixel importances
 plt.matshow(importances, cmap=plt.cm.hot)
