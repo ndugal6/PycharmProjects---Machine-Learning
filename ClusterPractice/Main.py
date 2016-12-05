@@ -9,17 +9,24 @@ def load_image( filename ) :
     im = Image.open(filename)
     return np.asarray(im)
 vertArray = []
-nameBegin = "/Users/nickdugal/desktop/pics/vertical/vertical"
-nameEnd = ".png"
-print(nameBegin,0,nameEnd)
-np_dictionary = {'The_Dealeo':msc.imread(nameBegin + str(0) + nameEnd).flatten()}
-for extension in range(0,20):
-    np_dictionary[str(extension)] = msc.imread(nameBegin + str(extension) + nameEnd).flatten()
+va = [1,2]
+vb = [2,3]
+vertArray.append(va)
+vertArray.append(vb)
+print(vertArray)
+# nameBegin = "/Users/nickdugal/desktop/pics/vertical/vertical"
+# nameEnd = ".png"
+# print(nameBegin,0,nameEnd)
+# np_dictionary = {'The_Dealeo':msc.imread(nameBegin + str(0) + nameEnd).flatten()}
+# for extension in range(0,20):
+#     np_dictionary[str(extension)] = msc.imread(nameBegin + str(extension) + nameEnd).flatten()
+
+
     # vertArray.insert(0,msc.imread(nameBegin + str(extension) + nameEnd))
 # np_list = np.asarray(vertArray)
 
-datafram = pd.DataFrame(np_dictionary)
-datafram.to_csv('first.csv')
+# datafram = pd.DataFrame(np_dictionary)
+# datafram.to_csv('first.csv')
 # vert_np_array = np.array(vertArray)
 # np.savetxt("foo.csv", vert_np_array[1,...], delimiter=",",fmt='%.18e')
 
