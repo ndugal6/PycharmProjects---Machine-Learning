@@ -1,4 +1,6 @@
-from Line_Recognizing import Line_Recognizer4
+#Original From http://scikit-learn.org/stable/auto_examples/cluster/plot_mean_shift.html#
+
+from Line_Recognizing import The_Featurizer
 
 
 def main():
@@ -6,7 +8,7 @@ def main():
     from sklearn.cluster import MeanShift, estimate_bandwidth
     from sklearn.datasets.samples_generator import make_blobs
     centers = [[1, 1], [-1, -1], [1, -1]]
-    features = Line_Recognizer4.FeatureExtractor()
+    features = The_Featurizer.FeatureExtractor()
     import time
     start = time.time()
     for i in range(3334):

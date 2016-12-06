@@ -8,12 +8,19 @@ import matplotlib.pyplot as plt
 class FeatureExtractor:
     def __init__(self):
         self.features = []
+        self.targets = []
 
     def features(self):
         return self.features
 
     def set_features(self, key):
         self.features.append(key)
+
+    def targets(self):
+        return self.targets
+
+    def set_targets(self,key):
+        self.targets.append(key)
 
 
 
@@ -95,16 +102,25 @@ class FeatureExtractor:
         height, horMax = self.horizontalScan(filePath)
         width, verMax = self.verticalScan(filePath)
         # features = [height, horMax, width, verMax]
-        features = [horMax,verMax]
+        # features = [horMax, verMax, height*width]
+        features = [horMax, verMax, height, width]
+        # features = [horMax,verMax]
         self.set_features(features)
 
+    def featurizeTargets(self, filePath, target):
+        self.set_targets(target)
+        self.featurize(filePath)
+
 def main():
-    # scanning = FeatureExtractor()
+    scanning = FeatureExtractor()
     # print(scanning.features)
-    # scanning.featurize("/Users/nickdugal/desktop/pics/oscilating/wave1.jpeg")
+    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/vertical/vertical1.jpeg",0)
     # print(scanning.features)
-    # scanning.featurize("/Users/nickdugal/desktop/pics/oscilating/wave1.jpeg")
+    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/horizontal/horizontal1.jpeg",1)
     # print(scanning.features)
+    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/oscilating/wave1.jpeg",2)
+    print(scanning.features)
+    print(scanning.targets)
     print('Hello Features')
 
 if __name__ == "__main__": main()
