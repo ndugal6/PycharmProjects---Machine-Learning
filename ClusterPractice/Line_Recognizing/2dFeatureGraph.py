@@ -11,26 +11,26 @@ def main():
     features = The_Featurizer.FeatureExtractor()
     import time
     start = time.time()
-    for i in range(3334):
+    for i in range(334):
         features.featurize("/Users/nickdugal/desktop/pics/horizontal/horizontal" + str(i) + ".jpeg")
     # print(features.features)
     end = time.time()
     print(end - start)
     start= time.time()
-    for i in range(3333):
+    for i in range(333):
         features.featurize("/Users/nickdugal/desktop/pics/vertical/vertical" + str(i) + ".jpeg")
 
     end = time.time()
     print(end-start)
     start = time.time()
-    for i in range(3333):
+    for i in range(333):
         features.featurize("/Users/nickdugal/desktop/pics/oscilating/wave" + str(i) + ".jpeg")
     X = features.features
     X = np.asarray(X)
     end = time.time()
     print(end-start)
     # The following bandwidth can be automatically detected using
-    bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=500)
+    bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=5000)
 
     ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
     ms.fit(X)

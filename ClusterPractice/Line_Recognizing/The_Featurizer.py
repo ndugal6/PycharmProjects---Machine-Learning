@@ -112,16 +112,17 @@ class FeatureExtractor:
         self.featurize(filePath)
 
 def main():
-    scanning = FeatureExtractor()
+    vscanning = FeatureExtractor()
     # print(scanning.features)
-    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/vertical/vertical1.jpeg",0)
+    vscanning.featurizeTargets("/Users/nickdugal/desktop/pics/vertical/vertical1.jpeg",0)
     # print(scanning.features)
-    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/horizontal/horizontal1.jpeg",1)
+    hscanning = FeatureExtractor()
+    hscanning.featurizeTargets("/Users/nickdugal/desktop/pics/horizontal/horizontal1.jpeg",1)
     # print(scanning.features)
-    scanning.featurizeTargets("/Users/nickdugal/desktop/pics/oscilating/wave1.jpeg",2)
-    print(scanning.features)
-    print(scanning.targets)
-    print('Hello Features')
+    oscanning = FeatureExtractor()
+    oscanning.featurizeTargets("/Users/nickdugal/desktop/pics/oscilating/wave1.jpeg",2)
+    print("Vertical Features: {}\n Horizontal Features: {}\n Oscilating Features: {}\n Features: Horizontal Maxes, Vertical Maxes, Height, Width".format(vscanning.features, hscanning.features, oscanning.features))
+    print("targets {}, {}, {}".format(vscanning.targets, hscanning.targets,oscanning.targets))
 
 if __name__ == "__main__": main()
 

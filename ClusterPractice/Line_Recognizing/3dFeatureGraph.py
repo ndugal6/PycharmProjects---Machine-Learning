@@ -62,14 +62,14 @@ for name, est in estimators.items():
     est.fit(X)
     labels = est.labels_
 
-    ax.scatter(X[:, 3], X[:, 0], X[:, 2], c=labels.astype(np.float))
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=labels.astype(np.float))
 
     ax.w_xaxis.set_ticklabels([])
     ax.w_yaxis.set_ticklabels([])
     ax.w_zaxis.set_ticklabels([])
-    ax.set_xlabel('Petal width')
-    ax.set_ylabel('Sepal length')
-    ax.set_zlabel('Petal length')
+    ax.set_xlabel('Horizontal Maxes')
+    ax.set_ylabel('Vertical Maxes')
+    ax.set_zlabel('Line length')
     fignum = fignum + 1
 
 # Plot the ground truth
@@ -94,7 +94,7 @@ ax.scatter(X[:, 3], X[:, 0], X[:, 2], c=y)
 ax.w_xaxis.set_ticklabels([])
 ax.w_yaxis.set_ticklabels([])
 ax.w_zaxis.set_ticklabels([])
-ax.set_xlabel('Petal width')
-ax.set_ylabel('Sepal length')
-ax.set_zlabel('Petal length')
+ax.set_xlabel('Hor Maxes')
+ax.set_ylabel('Ver Maxes')
+ax.set_zlabel('Line length')
 plt.show()

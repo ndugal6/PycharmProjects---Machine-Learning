@@ -13,37 +13,25 @@ from sklearn.datasets import fetch_olivetti_faces
 from sklearn.ensemble import ExtraTreesClassifier
 from scipy import misc
 import numpy as np
+from Line_Recognizing import The_Featurizer
 
 # Number of cores to use to perform parallel fitting of the forest model
 n_jobs = 1
 
-# Load the faces dataset
-from create_Dataset2 import  CustomDataSet
-dic = dict(data=[], target=[])
+test_features = The_Featurizer.FeatureExtractor()
+for i in range(334,400):
+    test_features.featurizeTargets("/Users/nickdugal/desktop/pics/horizontal/horizontal" + str(i) + ".jpeg",0)
+for i in range(333,400):
+    test_features.featurizeTargets("/Users/nickdugal/desktop/pics/vertical/vertical" + str(i) + ".jpeg",1)
+for i in range(333,400):
+    test_features.featurizeTargets("/Users/nickdugal/desktop/pics/oscilating/wave" + str(i) + ".jpeg",2)
+X_test = test_features.features
+X_test = np.asarray(X_test)
+y_test = np.asarray(test_features.targets)
 
-for i in range(10000):
-    dat = dic['data']
-    img = misc.imread("/Users/nickdugal/desktop/pics/oscilating/wave{}.jpeg".format(i)) / 255
-    w, h, d = original_shape = tuple(img.shape)
-    assert d == 4, print(img.shape)
-    image_array = np.reshape(img, (w * h, d))
-    dat.append(image_array)
-    dic['data'] = dat
-    tar = dic['target']
-    tar.append(0)
-    dic['target'] = tar
-
-ds = CustomDataSet()
-ds.data = dic['data']
-ds.target = dic['target']
-X = np.asarray(ds.data)
-#data = fetch_olivetti_faces()
-X = X.reshape((len(ds.data), -1))
-y = np.asarray(ds.target)
-
-mask = y < 5  # Limit to 5 classes
-X = X[mask]
-y = y[mask]
+mask = y_test < 5  # Limit to 5 classes
+X_test = X_test[mask]
+y_test = y_test[mask]
 
 # Build a forest and compute the pixel importances
 print("Fitting ExtraTreesClassifier on faces data with %d cores..." % n_jobs)
@@ -53,10 +41,10 @@ forest = ExtraTreesClassifier(n_estimators=1000,
                               n_jobs=n_jobs,
                               random_state=0)
 
-forest.fit(X, y)
+forest.fit(X_test, y_test)
 print("done in %0.3fs" % (time() - t0))
 importances = forest.feature_importances_
-importances = importances.reshape(ds.data[0].shape)
+importances = importances.reshape(X_test.shape)
 
 # Plot pixel importances
 plt.matshow(importances, cmap=plt.cm.hot)
