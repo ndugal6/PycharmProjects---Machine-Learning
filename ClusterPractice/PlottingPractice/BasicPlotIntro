@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+
+#Two list with radius and area of a circle
+radius = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+area = [3.14159, 12.56636, 28.27431, 50.26544, 78.53975, 113.09724]
+#Make sure two list you are plotting have the same dimensions
+
+#radius on HORIZONTAL axis, area of VERTICAL (X,Y)
+plt.plot(radius, area)
+#So I need to label those axis
+plt.xlabel('Radius')
+plt.ylabel('Area')
+
+#Add a title to the figure
+plt.title('Area of a Circle')
+
+
+#Finally make it appear with
+plt.show()
+
